@@ -83,11 +83,13 @@ def lambda_handler(event, context):
         print("Calling Bedrock invoke_model API with payload:", json.dumps(request_payload))
         
         # invoke_model APIを呼び出し
-        response = bedrock_client.invoke_model(
-            modelId=MODEL_ID,
-            body=json.dumps(request_payload),
-            contentType="application/json"
-        )
+        # response = bedrock_client.invoke_model(
+        #     modelId=MODEL_ID,
+        #     body=json.dumps(request_payload),
+        #     contentType="application/json"
+        # )
+        response = urllib.request.urlopen("https://9e90-34-31-253-220.ngrok-free.app/", data=payload)
+
         
         # レスポンスを解析
         response_body = json.loads(response['body'].read())
